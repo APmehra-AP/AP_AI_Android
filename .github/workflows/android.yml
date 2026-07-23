@@ -6,19 +6,22 @@ on:
   push:
     branches:
       - main
-
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    container:
+      image: ghcr.io/kivy/buildozer:latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Build APK
-        uses: digreatbrian/buildozer-action@v2
+        run: |
+          buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
