@@ -2,14 +2,21 @@
 
 import flet as ft
 
+from engine.commands import execute
+
 
 def main(page: ft.Page):
-
     page.title = "AP AI Android"
     page.theme_mode = ft.ThemeMode.DARK
-    page.window.width = 420
-    page.window.height = 800
+
+    try:
+        page.window.width = 420
+        page.window.height = 800
+    except Exception:
+        pass
+
     page.padding = 20
+    page.scroll = ft.ScrollMode.AUTO
 
     title = ft.Text(
         "🤖 AP AI Android",
@@ -22,34 +29,38 @@ def main(page: ft.Page):
         size=16,
     )
 
-    chat = ft.Text(
-        "👋 Welcome AP!\n\nGUI successfully started.",
+    output = ft.Text(
+        "👋 Welcome AP!\n\nAsk me anything.",
         selectable=True,
     )
 
     message = ft.TextField(
-        label="Type your message",
+        label="Type your message...",
+        hint_text="Example: help",
         expand=True,
+        autofocus=True,
     )
 
-    def send(e):
+    def send(e=None):
+        text = message.value.strip()
 
-        if not message.value:
+        if not text:
             return
 
-        chat.value += (
-            "\n\n🧑 You : "
-            + message.value
-        )
+        output.value += f"\n\n🧑 You : {text}"
 
-        chat.value += (
-            "\n🤖 AP AI : "
-            + "GUI connected successfully."
-        )
+        try:
+            reply = execute(text)
+        except Exception as ex:
+            reply = f"❌ Error:\n{ex}"
+
+        output.value += f"\n🤖 AP AI : {reply}"
 
         message.value = ""
 
         page.update()
+
+    message.on_submit = send
 
     send_button = ft.ElevatedButton(
         "Send",
@@ -57,15 +68,10 @@ def main(page: ft.Page):
     )
 
     page.add(
-
         title,
-
         subtitle,
-
         ft.Divider(),
-
-        chat,
-
+        output,
         ft.Row(
             [
                 message,
@@ -75,4 +81,5 @@ def main(page: ft.Page):
     )
 
 
-ft.app(target=main)
+if __name__ == "__main__":
+    ft.app(target=main)
