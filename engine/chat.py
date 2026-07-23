@@ -1,0 +1,113 @@
+# Created by : Amarchand Meghwal
+
+from datetime import datetime
+
+
+class ChatEngine:
+
+    def __init__(self):
+        self.name = "AP AI"
+        self.version = "42.2"
+
+        self.suggestions = {
+            "hep": "help",
+            "hlp": "help",
+            "byr": "bye",
+            "remeber": "remember",
+            "memry": "memory",
+            "recal": "recall",
+            "helo": "hello",
+            "hii": "hi",
+        }
+
+    def reply(self, message):
+
+        msg = message.lower().strip()
+
+        # Auto Suggestion
+        if msg in self.suggestions:
+            return f"💡 Kya aap '{self.suggestions[msg]}' kehna chahte the?"
+
+        greetings = [
+            "hi",
+            "hello",
+            "hey",
+            "namaste",
+        ]
+
+        if msg in greetings:
+            return "👋 Hello AP!"
+
+        elif msg == "name":
+            return f"🤖 My Name : {self.name}"
+
+        elif msg == "creator":
+            return "👨‍💻 Created by : Amarchand Meghwal"
+
+        elif msg in (
+            "who are you",
+            "about",
+            "about ap",
+            "about ap ai",
+        ):
+            return f"""🤖 I am {self.name}
+
+👨‍💻 Created by : Amarchand Meghwal
+🚀 Version : {self.version}
+
+💙 Your Personal AI Assistant"""
+
+        elif msg == "version":
+            return f"🚀 Version : {self.version}"
+
+        elif msg == "time":
+            return "🕒 " + datetime.now().strftime("%I:%M:%S %p")
+
+        elif msg == "date":
+            return "📅 " + datetime.now().strftime("%d-%m-%Y")
+
+        elif msg == "help":
+            return """
+📚 AP AI Help
+
+💬 Chat Commands
+• hi
+• hello
+• hey
+• namaste
+• name
+• creator
+• who are you
+• about
+• version
+• time
+• date
+
+🧠 Memory Commands
+• remember my name AP
+• remember my city Jaipur
+• recall name
+• recall city
+• memory
+
+🧮 Calculator Commands
+• 2+5
+• 10*20
+• 100/4
+• 50-15
+• square 9
+• cube 3
+• sqrt 49
+
+📜 History Commands
+• history
+• clear history
+
+👋 Exit
+• bye
+"""
+
+        return None
+
+
+chat = ChatEngine()
