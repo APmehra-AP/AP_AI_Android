@@ -1,0 +1,30 @@
+#:import dp kivy.metrics.dp
+
+<ChatScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "AP AI Chat"
+
+        MDScrollView:
+
+            MDLabel:
+                text: "Hello! I am AP AI.\n\nStart chatting..."
+                adaptive_height: True
+                padding: dp(20), dp(20)
+                halign: "left"
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: dp(10)
+            padding: dp(10)
+
+            MDTextField:
+                id: message
+                hint_text: "Type your message..."
+                mode: "rectangle"
+
+            MDIconButton:
+                icon: "send"

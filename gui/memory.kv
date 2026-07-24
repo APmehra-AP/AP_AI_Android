@@ -1,0 +1,33 @@
+#:import dp kivy.metrics.dp
+
+<MemoryScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Memory"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(15)
+
+            MDLabel:
+                text: "AP AI Memory"
+                halign: "center"
+                font_style: "Headline"
+
+            MDTextField:
+                hint_text: "Write something to remember..."
+                mode: "rectangle"
+
+            MDRaisedButton:
+                text: "Save Memory"
+                pos_hint: {"center_x": 0.5}
+
+            MDLabel:
+                text: "Saved memories will appear here."
+                halign: "center"
+
+            Widget

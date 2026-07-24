@@ -1,0 +1,32 @@
+#:import dp kivy.metrics.dp
+
+<SettingsScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Settings"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(15)
+
+            MDLabel:
+                text: "AP AI Settings"
+                halign: "center"
+                font_style: "Headline"
+
+            MDSwitch:
+                pos_hint: {"center_x": 0.5}
+
+            MDLabel:
+                text: "Dark Mode"
+                halign: "center"
+
+            MDRaisedButton:
+                text: "Save Settings"
+                pos_hint: {"center_x": 0.5}
+
+            Widget

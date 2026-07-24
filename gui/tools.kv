@@ -1,0 +1,37 @@
+#:import dp kivy.metrics.dp
+
+<ToolsScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Tools"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(15)
+
+            MDLabel:
+                text: "AP AI Tools"
+                halign: "center"
+                font_style: "Headline"
+
+            MDRaisedButton:
+                text: "Calculator"
+                pos_hint: {"center_x": 0.5}
+
+            MDRaisedButton:
+                text: "Translator"
+                pos_hint: {"center_x": 0.5}
+
+            MDRaisedButton:
+                text: "Weather"
+                pos_hint: {"center_x": 0.5}
+
+            MDRaisedButton:
+                text: "Notes"
+                pos_hint: {"center_x": 0.5}
+
+            Widget
