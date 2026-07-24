@@ -86,8 +86,8 @@ def internet_search(query):
         except Exception:
             return f"HTTP Error {e.code}"
 
-    except URLError:
-        return "🌐 Internet connection failed."
+    except URLError as e:
+        return f"🌐 Network Error:\n{e}"
 
     except Exception as e:
         return f"❌ Internet Error:\n{e}"

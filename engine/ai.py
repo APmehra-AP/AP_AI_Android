@@ -119,11 +119,8 @@ Current User Message:
             except Exception:
                 return f"HTTP Error {e.code}"
 
-        except URLError:
-            return (
-                "🌐 Internet connection failed.\n"
-                "Please check your network."
-            )
+        except URLError as e:
+            return f"🌐 Network Error:\n{e}"
 
         except json.JSONDecodeError:
             return "❌ Invalid JSON response."
