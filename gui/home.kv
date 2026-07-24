@@ -1,43 +1,18 @@
-#:import dp kivy.metrics.dp
-
 <HomeScreen>
 
     MDBoxLayout:
         orientation: "vertical"
+        padding: "20dp"
+        spacing: "20dp"
 
-        MDTopAppBar:
-            title: "AP AI"
-            elevation: 4
+        MDLabel:
+            text: "AP AI"
+            halign: "center"
 
-        MDBoxLayout:
-            orientation: "vertical"
-            padding: dp(20)
-            spacing: dp(20)
+        MDLabel:
+            text: "Welcome!"
+            halign: "center"
 
-            Widget
-
-            MDIcon:
-                icon: "robot-happy-outline"
-                icon_size: "90sp"
-                pos_hint: {"center_x": 0.5}
-                theme_text_color: "Custom"
-                text_color: 0.0, 0.7, 1.0, 1
-
-            MDLabel:
-                text: "Welcome to AP AI"
-                halign: "center"
-                font_style: "Headline"
-                theme_text_color: "Primary"
-
-            MDLabel:
-                text: "Your Personal AI Assistant"
-                halign: "center"
-                theme_text_color: "Secondary"
-
-            MDRaisedButton:
-                text: "Start Chat"
-                pos_hint: {"center_x": 0.5}
-                on_release:
-                    app.root.current = "chat"
-
-            Widget
+        MDRaisedButton:
+            text: "Test Button"
+            pos_hint: {"center_x": 0.5}
