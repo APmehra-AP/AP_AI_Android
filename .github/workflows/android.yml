@@ -4,7 +4,7 @@ name: Build APK
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -41,9 +41,13 @@ jobs:
           pip install Cython==0.29.36
           pip install buildozer python-for-android
 
+      - name: Add OpenRouter API Key
+        run: |
+          sed -i 's|OPENROUTER_API_KEY = ""|OPENROUTER_API_KEY = "${{ secrets.OPENROUTER_API_KEY }}"|' engine/config.py
+
       - name: Build APK
         run: |
-          buildozer android debug
+          buildozer android debug --allow-root
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
