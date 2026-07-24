@@ -1,6 +1,9 @@
 # Created by : Amarchand Meghwal
 
 import json
+import ssl
+import certifi
+
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
@@ -84,7 +87,15 @@ Current User Message:
                 },
             )
 
-            with urlopen(req, timeout=30) as response:
+            context_ssl = ssl.create_default_context(
+                cafile=certifi.where()
+            )
+
+            with urlopen(
+                req,
+                timeout=30,
+                context=context_ssl,
+            ) as response:
 
                 data = json.loads(
                     response.read().decode("utf-8")
@@ -111,11 +122,9 @@ Current User Message:
             return message
 
         except HTTPError as e:
-
             try:
                 error = e.read().decode("utf-8")
                 return f"HTTP Error {e.code}\n{error}"
-
             except Exception:
                 return f"HTTP Error {e.code}"
 
