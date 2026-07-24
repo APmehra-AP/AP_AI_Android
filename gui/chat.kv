@@ -4,27 +4,34 @@
 
     MDBoxLayout:
         orientation: "vertical"
+        padding: dp(15)
+        spacing: dp(15)
 
-        MDTopAppBar:
-            title: "AP AI Chat"
+        canvas.before:
+            Color:
+                rgba: 0.04,0.05,0.09,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
 
-        MDScrollView:
+        MDLabel:
+            text: "Chat"
+            halign: "center"
+            font_style: "H5"
+
+        MDCard:
+            padding: dp(15)
+            adaptive_height: True
 
             MDLabel:
-                text: "Hello! I am AP AI.\n\nStart chatting..."
-                adaptive_height: True
-                padding: dp(20), dp(20)
-                halign: "left"
+                text: "Conversation will appear here."
+                halign: "center"
 
-        MDBoxLayout:
-            adaptive_height: True
-            spacing: dp(10)
-            padding: dp(10)
+        Widget
 
-            MDTextField:
-                id: message
-                hint_text: "Type your message..."
-                mode: "rectangle"
+        MDTextField:
+            hint_text: "Type a message"
 
-            MDIconButton:
-                icon: "send"
+        MDRaisedButton:
+            text: "Send"
+            pos_hint: {"center_x": .5}

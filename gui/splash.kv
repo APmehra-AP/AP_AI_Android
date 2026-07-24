@@ -1,23 +1,47 @@
 #:import dp kivy.metrics.dp
 
-<SplashScreen>:
+<SplashScreen>
 
     MDBoxLayout:
         orientation: "vertical"
-        padding: dp(20)
+        padding: dp(30)
         spacing: dp(20)
+
+        canvas.before:
+            Color:
+                rgba: 0.03, 0.05, 0.09, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget
+
+        MDIcon:
+            icon: "robot-outline"
+            icon_size: "100sp"
+            pos_hint: {"center_x": .5}
+            theme_text_color: "Custom"
+            text_color: 0.0, 0.75, 1.0, 1
 
         MDLabel:
             text: "AP AI"
             halign: "center"
             font_style: "H4"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0.0, 0.75, 1.0, 1
 
         MDLabel:
-            text: "Created by : Amarchand Meghwal"
+            text: "Your Personal AI Assistant"
             halign: "center"
+            theme_text_color: "Secondary"
 
-        MDRaisedButton:
-            text: "Open Home"
-            pos_hint: {"center_x": .5}
-            on_release:
-                app.root.current = "home"
+        MDProgressBar:
+            value: 100
+
+        MDLabel:
+            text: "Loading..."
+            halign: "center"
+            theme_text_color: "Hint"
+
+        Widget

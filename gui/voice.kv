@@ -4,31 +4,36 @@
 
     MDBoxLayout:
         orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(20)
 
-        MDTopAppBar:
-            title: "Voice Assistant"
+        canvas.before:
+            Color:
+                rgba: 0.04, 0.05, 0.09, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
 
-        MDBoxLayout:
-            orientation: "vertical"
-            padding: dp(20)
-            spacing: dp(20)
+        MDLabel:
+            text: "Voice Assistant"
+            halign: "center"
+            font_style: "H5"
 
-            Widget
+        Widget
 
-            MDIcon:
-                icon: "microphone"
-                icon_size: "100sp"
-                pos_hint: {"center_x": 0.5}
-                theme_text_color: "Custom"
-                text_color: 0.0, 0.7, 1.0, 1
+        MDIcon:
+            icon: "microphone"
+            icon_size: "90sp"
+            pos_hint: {"center_x": .5}
+            theme_text_color: "Custom"
+            text_color: 0.0, 0.75, 1.0, 1
 
-            MDLabel:
-                text: "Voice Mode"
-                halign: "center"
-                font_style: "Headline"
+        MDLabel:
+            text: "Tap the microphone to start speaking"
+            halign: "center"
 
-            MDRaisedButton:
-                text: "Start Listening"
-                pos_hint: {"center_x": 0.5}
+        Widget
 
-            Widget
+        MDRaisedButton:
+            text: "Start Listening"
+            pos_hint: {"center_x": .5}

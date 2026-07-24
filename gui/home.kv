@@ -14,24 +14,20 @@
                 pos: self.pos
                 size: self.size
 
-        MDBoxLayout:
-            adaptive_height: True
-            padding: dp(10)
-
-            MDLabel:
-                text: "AP AI"
-                halign: "center"
-                font_style: "H4"
-                bold: True
-                theme_text_color: "Custom"
-                text_color: 0.1, 0.8, 1, 1
+        MDLabel:
+            text: "AP AI"
+            halign: "center"
+            font_style: "H4"
+            bold: True
+            theme_text_color: "Custom"
+            text_color: 0, 0.75, 1, 1
 
         MDCard:
             orientation: "vertical"
-            padding: dp(20)
+            padding: dp(18)
             radius: [20]
+            elevation: 4
             adaptive_height: True
-            elevation: 3
 
             MDLabel:
                 text: "Welcome"
@@ -48,27 +44,69 @@
             spacing: dp(15)
             adaptive_height: True
 
-            MDRaisedButton:
-                text: "Chat"
+            MDCard:
+                ripple_behavior: True
+                padding: dp(15)
+                radius: [18]
+                adaptive_height: True
 
-            MDRaisedButton:
-                text: "Voice"
+                MDLabel:
+                    text: "💬 Chat"
+                    halign: "center"
 
-            MDRaisedButton:
-                text: "Memory"
+            MDCard:
+                ripple_behavior: True
+                padding: dp(15)
+                radius: [18]
+                adaptive_height: True
 
-            MDRaisedButton:
-                text: "Tools"
+                MDLabel:
+                    text: "🎤 Voice"
+                    halign: "center"
 
-            MDRaisedButton:
-                text: "Settings"
+            MDCard:
+                ripple_behavior: True
+                padding: dp(15)
+                radius: [18]
+                adaptive_height: True
 
-            MDRaisedButton:
-                text: "Notes"
+                MDLabel:
+                    text: "🧠 Memory"
+                    halign: "center"
+
+            MDCard:
+                ripple_behavior: True
+                padding: dp(15)
+                radius: [18]
+                adaptive_height: True
+
+                MDLabel:
+                    text: "🛠 Tools"
+                    halign: "center"
+
+            MDCard:
+                ripple_behavior: True
+                padding: dp(15)
+                radius: [18]
+                adaptive_height: True
+
+                MDLabel:
+                    text: "⚙ Settings"
+                    halign: "center"
+
+            MDCard:
+                ripple_behavior: True
+                padding: dp(15)
+                radius: [18]
+                adaptive_height: True
+
+                MDLabel:
+                    text: "📄 Notes"
+                    halign: "center"
 
         Widget
 
         MDLabel:
-            text: "AP AI Android"
+            text: "AP AI Phase 1"
             halign: "center"
             theme_text_color: "Hint"

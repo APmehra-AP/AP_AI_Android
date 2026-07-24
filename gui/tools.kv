@@ -4,34 +4,40 @@
 
     MDBoxLayout:
         orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(15)
 
-        MDTopAppBar:
-            title: "Tools"
+        canvas.before:
+            Color:
+                rgba: 0.04, 0.05, 0.09, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
 
-        MDBoxLayout:
+        MDLabel:
+            text: "Tools"
+            halign: "center"
+            font_style: "H5"
+
+        MDCard:
             orientation: "vertical"
-            padding: dp(20)
-            spacing: dp(15)
+            padding: dp(15)
+            adaptive_height: True
 
             MDLabel:
-                text: "AP AI Tools"
+                text: "Available Tools"
                 halign: "center"
-                font_style: "Headline"
 
-            MDRaisedButton:
-                text: "Calculator"
-                pos_hint: {"center_x": 0.5}
+        MDRaisedButton:
+            text: "Calculator"
+            pos_hint: {"center_x": .5}
 
-            MDRaisedButton:
-                text: "Translator"
-                pos_hint: {"center_x": 0.5}
+        MDRaisedButton:
+            text: "Translator"
+            pos_hint: {"center_x": .5}
 
-            MDRaisedButton:
-                text: "Weather"
-                pos_hint: {"center_x": 0.5}
+        MDRaisedButton:
+            text: "Weather"
+            pos_hint: {"center_x": .5}
 
-            MDRaisedButton:
-                text: "Notes"
-                pos_hint: {"center_x": 0.5}
-
-            Widget
+        Widget
