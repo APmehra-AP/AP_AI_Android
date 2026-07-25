@@ -1,46 +1,33 @@
 # Created by : Amarchand Meghwal
 
-from kivy.utils import get_color_from_hex
+from kivy.metrics import dp
 
 
 class Theme:
+    # App
+    APP_NAME = "AP AI"
+    VERSION = "2.0"
 
     # Background
-    BG = get_color_from_hex("#090C12")
+    BG = (0.04, 0.05, 0.09, 1)
+    SURFACE = (0.09, 0.11, 0.17, 1)
+    CARD = (0.12, 0.15, 0.23, 1)
 
-    # Cards
-    CARD = get_color_from_hex("#151A23")
-
-    # Primary Blue
-    PRIMARY = get_color_from_hex("#00BFFF")
-
-    # Secondary Blue
-    SECONDARY = get_color_from_hex("#4FC3F7")
-
-    # Success
-    SUCCESS = get_color_from_hex("#00E676")
-
-    # Warning
-    WARNING = get_color_from_hex("#FFC107")
-
-    # Error
-    ERROR = get_color_from_hex("#FF5252")
+    # Primary Colours
+    PRIMARY = (0.00, 0.72, 1.00, 1)
+    PRIMARY_DARK = (0.00, 0.52, 0.85, 1)
+    ACCENT = (0.10, 0.85, 1.00, 1)
 
     # Text
-    TEXT = get_color_from_hex("#FFFFFF")
+    TEXT = (1, 1, 1, 1)
+    TEXT_SECONDARY = (0.72, 0.78, 0.88, 1)
 
-    # Secondary Text
-    TEXT2 = get_color_from_hex("#B0BEC5")
+    # Status
+    SUCCESS = (0.20, 0.80, 0.45, 1)
+    WARNING = (1.00, 0.72, 0.10, 1)
+    ERROR = (1.00, 0.25, 0.25, 1)
 
-    # Radius
-    RADIUS = 22
-
-    # Padding
-    PADDING = 18
-
-    # Spacing
-    SPACING = 16
-
-    APP_NAME = "AP AI"
-
-    VERSION = "Phase 1"
+    # Layout
+    PADDING = dp(20)
+    SPACING = dp(15)
+    RADIUS = dp(20)

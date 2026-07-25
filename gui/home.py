@@ -19,3 +19,6 @@ class HomeScreen(MDScreen):
 
     def open_settings(self):
         self.manager.current = "settings"
+
+    def open_home(self):
+        self.manager.current = "home"
