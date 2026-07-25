@@ -5,7 +5,7 @@
     MDBoxLayout:
         orientation: "vertical"
         padding: dp(20)
-        spacing: dp(20)
+        spacing: dp(15)
 
         canvas.before:
             Color:
@@ -18,91 +18,38 @@
             text: "AP AI"
             halign: "center"
             font_style: "H4"
-            bold: True
             theme_text_color: "Custom"
             text_color: 0, 0.75, 1, 1
 
-        MDCard:
-            orientation: "vertical"
-            padding: dp(18)
-            radius: [20]
-            elevation: 4
-            adaptive_height: True
+        MDLabel:
+            text: "Your Personal AI Assistant"
+            halign: "center"
+            theme_text_color: "Secondary"
 
-            MDLabel:
-                text: "Welcome"
-                halign: "center"
-                font_style: "H5"
+        MDRaisedButton:
+            text: "💬 Chat"
+            pos_hint: {"center_x": .5}
+            on_release: root.open_chat()
 
-            MDLabel:
-                text: "Your Personal AI Assistant"
-                halign: "center"
-                theme_text_color: "Secondary"
+        MDRaisedButton:
+            text: "🎤 Voice"
+            pos_hint: {"center_x": .5}
+            on_release: root.open_voice()
 
-        MDGridLayout:
-            cols: 2
-            spacing: dp(15)
-            adaptive_height: True
+        MDRaisedButton:
+            text: "🧠 Memory"
+            pos_hint: {"center_x": .5}
+            on_release: root.open_memory()
 
-            MDCard:
-                ripple_behavior: True
-                padding: dp(15)
-                radius: [18]
-                adaptive_height: True
+        MDRaisedButton:
+            text: "🛠 Tools"
+            pos_hint: {"center_x": .5}
+            on_release: root.open_tools()
 
-                MDLabel:
-                    text: "💬 Chat"
-                    halign: "center"
-
-            MDCard:
-                ripple_behavior: True
-                padding: dp(15)
-                radius: [18]
-                adaptive_height: True
-
-                MDLabel:
-                    text: "🎤 Voice"
-                    halign: "center"
-
-            MDCard:
-                ripple_behavior: True
-                padding: dp(15)
-                radius: [18]
-                adaptive_height: True
-
-                MDLabel:
-                    text: "🧠 Memory"
-                    halign: "center"
-
-            MDCard:
-                ripple_behavior: True
-                padding: dp(15)
-                radius: [18]
-                adaptive_height: True
-
-                MDLabel:
-                    text: "🛠 Tools"
-                    halign: "center"
-
-            MDCard:
-                ripple_behavior: True
-                padding: dp(15)
-                radius: [18]
-                adaptive_height: True
-
-                MDLabel:
-                    text: "⚙ Settings"
-                    halign: "center"
-
-            MDCard:
-                ripple_behavior: True
-                padding: dp(15)
-                radius: [18]
-                adaptive_height: True
-
-                MDLabel:
-                    text: "📄 Notes"
-                    halign: "center"
+        MDRaisedButton:
+            text: "⚙ Settings"
+            pos_hint: {"center_x": .5}
+            on_release: root.open_settings()
 
         Widget
 
