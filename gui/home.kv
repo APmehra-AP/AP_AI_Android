@@ -4,8 +4,8 @@
 
     MDBoxLayout:
         orientation: "vertical"
-        padding: dp(16)
-        spacing: dp(16)
+        spacing: dp(12)
+        padding: dp(12)
 
         MDTopAppBar:
             title: "AP AI"
@@ -14,37 +14,42 @@
             right_action_items: [["cog", lambda x: root.open_settings()]]
 
         MDCard:
-            radius: [20]
-            elevation: 3
-            padding: dp(20)
             size_hint_y: None
-            height: dp(190)
+            height: dp(180)
+            radius: [20]
+            elevation: 4
+            padding: dp(18)
 
             MDBoxLayout:
                 orientation: "vertical"
-                spacing: dp(10)
+                spacing: dp(8)
 
                 MDLabel:
-                    text: "🤖 Welcome Back"
+                    text: "Welcome Back"
                     font_style: "H5"
                     bold: True
 
                 MDLabel:
-                    text: "AP AI Status : ONLINE"
+                    text: "AP AI is Online"
                     theme_text_color: "Secondary"
 
                 MDLabel:
-                    text: "Version : V2.1"
+                    text: "Version : V2.2 Premium"
                     theme_text_color: "Hint"
 
                 Widget:
 
                 MDRaisedButton:
                     text: "Open Chat"
-                    size_hint: None, None
-                    size: dp(150), dp(45)
                     pos_hint: {"center_x": .5}
+                    size_hint: None, None
+                    size: dp(150), dp(44)
                     on_release: root.open_chat()
+
+        MDLabel:
+            text: "Quick Actions"
+            bold: True
+            adaptive_height: True
 
         MDGridLayout:
             cols: 2
@@ -52,17 +57,73 @@
             adaptive_height: True
 
             MDRaisedButton:
-                text: "🎤 Voice"
+                text: "Chat"
+                on_release: root.open_chat()
+
+            MDRaisedButton:
+                text: "Voice"
                 on_release: root.open_voice()
 
             MDRaisedButton:
-                text: "🧠 Memory"
+                text: "Memory"
                 on_release: root.open_memory()
 
             MDRaisedButton:
-                text: "🛠 Tools"
+                text: "Tools"
                 on_release: root.open_tools()
 
-            MDRaisedButton:
-                text: "⚙ Settings"
+        MDLabel:
+            text: "AI Status"
+            bold: True
+            adaptive_height: True
+
+        MDCard:
+            size_hint_y: None
+            height: dp(150)
+            radius: [20]
+            elevation: 3
+            padding: dp(16)
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(8)
+
+                MDIcon:
+                    icon: "robot-outline"
+                    icon_size: "48sp"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.7, 1, 1
+
+                MDLabel:
+                    text: "AP AI ONLINE"
+                    halign: "center"
+                    bold: True
+
+                MDLabel:
+                    text: "Ready to help you"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+
+        MDGridLayout:
+            cols: 2
+            spacing: dp(10)
+            adaptive_height: True
+
+            MDRectangleFlatButton:
+                text: "Chat"
+                on_release: root.open_chat()
+
+            MDRectangleFlatButton:
+                text: "Voice"
+                on_release: root.open_voice()
+
+            MDRectangleFlatButton:
+                text: "Memory"
+                on_release: root.open_memory()
+
+            MDRectangleFlatButton:
+                text: "Settings"
                 on_release: root.open_settings()
+
+        Widget:
