@@ -20,7 +20,8 @@
             ScrollView:
 
                 MDLabel:
-                    text: "🤖 Welcome to AP AI Chat\n\nYour conversation will appear here."
+                    id: chat_label
+                    text: "🤖 AP AI\n\nWelcome!\n"
                     adaptive_height: True
                     halign: "left"
                     text_size: self.width, None
@@ -31,7 +32,9 @@
             spacing: dp(8)
 
             MDTextField:
+                id: message_input
                 hint_text: "Type a message..."
 
             MDRaisedButton:
                 text: "Send"
+                on_release: root.send_message()
