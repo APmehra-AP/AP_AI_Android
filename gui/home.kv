@@ -4,20 +4,58 @@
 
     MDBoxLayout:
         orientation: "vertical"
-        spacing: dp(12)
-        padding: dp(12)
+        padding: dp(16)
+        spacing: dp(16)
 
         MDTopAppBar:
             title: "AP AI"
             elevation: 0
             left_action_items: [["robot-outline", lambda x: None]]
-            right_action_items: [["cog", lambda x: root.open_settings()]]
+            right_action_items: [["cog-outline", lambda x: root.open_settings()]]
 
         MDCard:
             size_hint_y: None
-            height: dp(180)
+            height: dp(220)
+            radius: [24]
+            elevation: 3
+            padding: dp(20)
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(12)
+
+                MDIcon:
+                    icon: "robot-outline"
+                    icon_size: "72sp"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.75, 1.0, 1
+
+                MDLabel:
+                    text: "AP AI CORE"
+                    halign: "center"
+                    font_style: "H6"
+                    bold: True
+
+                MDLabel:
+                    text: "Online • Ready to Assist"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+
+                Widget:
+
+                MDRaisedButton:
+                    text: "Open Chat"
+                    size_hint: None, None
+                    size: dp(160), dp(48)
+                    pos_hint: {"center_x": .5}
+                    on_release: root.open_chat()
+
+        MDCard:
+            size_hint_y: None
+            height: dp(150)
             radius: [20]
-            elevation: 4
+            elevation: 2
             padding: dp(18)
 
             MDBoxLayout:
@@ -30,21 +68,16 @@
                     bold: True
 
                 MDLabel:
-                    text: "AP AI is Online"
+                    text: "Your Personal AI Assistant"
                     theme_text_color: "Secondary"
-
-                MDLabel:
-                    text: "Version : V2.2 Premium"
-                    theme_text_color: "Hint"
 
                 Widget:
 
-                MDRaisedButton:
-                    text: "Open Chat"
-                    pos_hint: {"center_x": .5}
-                    size_hint: None, None
-                    size: dp(150), dp(44)
-                    on_release: root.open_chat()
+                MDLabel:
+                    text: "Status : ONLINE"
+                    halign: "right"
+                    theme_text_color: "Custom"
+                    text_color: 0.0, 0.8, 0.4, 1
 
         MDLabel:
             text: "Quick Actions"
@@ -56,21 +89,101 @@
             spacing: dp(12)
             adaptive_height: True
 
-            MDRaisedButton:
-                text: "Chat"
-                on_release: root.open_chat()
+            MDCard:
+                size_hint_y: None
+                height: dp(120)
+                radius: [18]
+                elevation: 2
 
-            MDRaisedButton:
-                text: "Voice"
-                on_release: root.open_voice()
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: dp(12)
+                    spacing: dp(8)
 
-            MDRaisedButton:
-                text: "Memory"
-                on_release: root.open_memory()
+                    MDIcon:
+                        icon: "message-text-outline"
+                        halign: "center"
+                        icon_size: "40sp"
 
-            MDRaisedButton:
-                text: "Tools"
-                on_release: root.open_tools()
+                    MDLabel:
+                        text: "Chat"
+                        halign: "center"
+
+                    MDRaisedButton:
+                        text: "Open"
+                        on_release: root.open_chat()
+
+            MDCard:
+                size_hint_y: None
+                height: dp(120)
+                radius: [18]
+                elevation: 2
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: dp(12)
+                    spacing: dp(8)
+
+                    MDIcon:
+                        icon: "microphone-outline"
+                        halign: "center"
+                        icon_size: "40sp"
+
+                    MDLabel:
+                        text: "Voice"
+                        halign: "center"
+
+                    MDRaisedButton:
+                        text: "Open"
+                        on_release: root.open_voice()
+
+            MDCard:
+                size_hint_y: None
+                height: dp(120)
+                radius: [18]
+                elevation: 2
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: dp(12)
+                    spacing: dp(8)
+
+                    MDIcon:
+                        icon: "brain"
+                        halign: "center"
+                        icon_size: "40sp"
+
+                    MDLabel:
+                        text: "Memory"
+                        halign: "center"
+
+                    MDRaisedButton:
+                        text: "Open"
+                        on_release: root.open_memory()
+
+            MDCard:
+                size_hint_y: None
+                height: dp(120)
+                radius: [18]
+                elevation: 2
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: dp(12)
+                    spacing: dp(8)
+
+                    MDIcon:
+                        icon: "tools"
+                        halign: "center"
+                        icon_size: "40sp"
+
+                    MDLabel:
+                        text: "Tools"
+                        halign: "center"
+
+                    MDRaisedButton:
+                        text: "Open"
+                        on_release: root.open_tools()
 
         MDLabel:
             text: "AI Status"
@@ -79,51 +192,61 @@
 
         MDCard:
             size_hint_y: None
-            height: dp(150)
+            height: dp(130)
             radius: [20]
-            elevation: 3
+            elevation: 2
             padding: dp(16)
 
             MDBoxLayout:
-                orientation: "vertical"
-                spacing: dp(8)
+                orientation: "horizontal"
+                spacing: dp(16)
 
                 MDIcon:
                     icon: "robot-outline"
-                    icon_size: "48sp"
-                    halign: "center"
+                    icon_size: "56sp"
                     theme_text_color: "Custom"
-                    text_color: 0.1, 0.7, 1, 1
+                    text_color: 0.0, 0.75, 1.0, 1
 
-                MDLabel:
-                    text: "AP AI ONLINE"
-                    halign: "center"
-                    bold: True
+                MDBoxLayout:
+                    orientation: "vertical"
 
-                MDLabel:
-                    text: "Ready to help you"
-                    halign: "center"
-                    theme_text_color: "Secondary"
+                    MDLabel:
+                        text: "AP AI ONLINE"
+                        bold: True
 
-        MDGridLayout:
-            cols: 2
-            spacing: dp(10)
-            adaptive_height: True
+                    MDLabel:
+                        text: "Ready for Commands"
+                        theme_text_color: "Secondary"
 
-            MDRectangleFlatButton:
-                text: "Chat"
-                on_release: root.open_chat()
-
-            MDRectangleFlatButton:
-                text: "Voice"
-                on_release: root.open_voice()
-
-            MDRectangleFlatButton:
-                text: "Memory"
-                on_release: root.open_memory()
-
-            MDRectangleFlatButton:
-                text: "Settings"
-                on_release: root.open_settings()
+                    MDLabel:
+                        text: "Version : V3 Stable"
+                        theme_text_color: "Hint"
 
         Widget:
+
+        MDCard:
+            size_hint_y: None
+            height: dp(70)
+            radius: [24]
+            elevation: 3
+            padding: dp(8)
+
+            MDGridLayout:
+                cols: 4
+                spacing: dp(8)
+
+                MDIconButton:
+                    icon: "home"
+                    on_release: root.open_home()
+
+                MDIconButton:
+                    icon: "message-text-outline"
+                    on_release: root.open_chat()
+
+                MDIconButton:
+                    icon: "microphone-outline"
+                    on_release: root.open_voice()
+
+                MDIconButton:
+                    icon: "cog-outline"
+                    on_release: root.open_settings()
