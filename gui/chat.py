@@ -4,4 +4,7 @@ from kivymd.uix.screen import MDScreen
 
 
 class ChatScreen(MDScreen):
-    pass
+
+    def go_home(self):
+        if self.manager:
+            self.manager.current = "home"
