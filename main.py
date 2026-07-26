@@ -2,7 +2,7 @@
 
 from kivy.lang import Builder
 from kivymd.app import MDApp
-from kivy.uix.screenmanager import ScreenManager
+from kivy.uix.screenmanager import ScreenManager, FadeTransition
 
 from gui.splash import SplashScreen
 from gui.home import HomeScreen
@@ -22,12 +22,16 @@ Builder.load_file("gui/settings.kv")
 
 
 class APAI(MDApp):
+
     def build(self):
         self.title = "AP AI"
+
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Blue"
 
-        sm = ScreenManager()
+        sm = ScreenManager(
+            transition=FadeTransition(duration=0.25)
+        )
 
         sm.add_widget(SplashScreen(name="splash"))
         sm.add_widget(HomeScreen(name="home"))
@@ -37,7 +41,6 @@ class APAI(MDApp):
         sm.add_widget(ToolsScreen(name="tools"))
         sm.add_widget(SettingsScreen(name="settings"))
 
-        # अभी सीधे Home Screen खोलते हैं
         sm.current = "home"
 
         return sm
