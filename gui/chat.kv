@@ -4,34 +4,65 @@
 
     MDBoxLayout:
         orientation: "vertical"
-        padding: dp(15)
-        spacing: dp(15)
+        padding: dp(16)
+        spacing: dp(12)
 
-        canvas.before:
-            Color:
-                rgba: 0.04,0.05,0.09,1
-            Rectangle:
-                pos: self.pos
-                size: self.size
+        MDTopAppBar:
+            title: "AP AI Chat"
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: app.root.current = "home"]]
 
-        MDLabel:
-            text: "Chat"
-            halign: "center"
-            font_style: "H5"
+        ScrollView:
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                spacing: dp(12)
+                padding: dp(8)
+
+                MDCard:
+                    size_hint_x: .85
+                    adaptive_height: True
+                    radius: [18]
+                    elevation: 2
+                    padding: dp(14)
+                    pos_hint: {"x": 0}
+
+                    MDLabel:
+                        text: "👋 Hello! I am AP AI. How can I help you today?"
+                        adaptive_height: True
+                        theme_text_color: "Primary"
+
+                MDCard:
+                    size_hint_x: .85
+                    adaptive_height: True
+                    radius: [18]
+                    elevation: 2
+                    padding: dp(14)
+                    pos_hint: {"right": 1}
+
+                    MDLabel:
+                        text: "Hi AP!"
+                        adaptive_height: True
+                        halign: "right"
 
         MDCard:
-            padding: dp(15)
-            adaptive_height: True
+            size_hint_y: None
+            height: dp(70)
+            radius: [20]
+            elevation: 2
+            padding: dp(8)
 
-            MDLabel:
-                text: "Conversation will appear here."
-                halign: "center"
+            MDBoxLayout:
+                spacing: dp(8)
 
-        Widget
+                MDTextField:
+                    id: message_input
+                    hint_text: "Type a message..."
+                    mode: "rectangle"
 
-        MDTextField:
-            hint_text: "Type a message"
+                MDIconButton:
+                    icon: "microphone-outline"
 
-        MDRaisedButton:
-            text: "Send"
-            pos_hint: {"center_x": .5}
+                MDRaisedButton:
+                    text: "Send"
