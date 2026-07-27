@@ -1,58 +1,57 @@
+# =========================================================
+# AP AI V4 Stable
 # Created by : Amarchand Meghwal
+# =========================================================
 
-import json
-import os
+"""
+Conversation History Manager
+"""
 
-HISTORY_FILE = "history.json"
-
-history_list = []
-
-
-def load_history():
-    global history_list
-
-    if os.path.exists(HISTORY_FILE):
-        try:
-            with open(HISTORY_FILE, "r") as f:
-                history_list = json.load(f)
-        except:
-            history_list = []
+from collections import deque
+from engine.config import MAX_HISTORY
 
 
-def save_history():
-    with open(HISTORY_FILE, "w") as f:
-        json.dump(history_list, f, indent=4)
+class HistoryManager:
+    def __init__(self, limit=MAX_HISTORY):
+        self.limit = limit
+        self.history = deque(maxlen=limit)
+
+    def add(self, role, message):
+        """Add a message to history."""
+        self.history.append({
+            "role": role,
+            "message": str(message).strip()
+        })
+
+    def clear(self):
+        """Clear history."""
+        self.history.clear()
+
+    def get(self):
+        """Return history as list."""
+        return list(self.history)
+
+    def last(self):
+        """Return last message."""
+        if self.history:
+            return self.history[-1]
+        return None
+
+    def count(self):
+        """Return total messages."""
+        return len(self.history)
+
+    def export_text(self):
+        """Return formatted conversation."""
+        lines = []
+
+        for item in self.history:
+            role = item["role"].capitalize()
+            msg = item["message"]
+            lines.append(f"{role}: {msg}")
+
+        return "\n".join(lines)
 
 
-def add_history(command):
-    command = command.strip()
-
-    if command:
-        history_list.append(command)
-
-        # Sirf last 20 commands rakho
-        if len(history_list) > 20:
-            history_list.pop(0)
-
-        save_history()
-
-
-def show_history():
-    if not history_list:
-        return "📜 History is empty."
-
-    result = "📜 Last Commands\n\n"
-
-    for i, cmd in enumerate(history_list, 1):
-        result += f"{i}. {cmd}\n"
-
-    return result.strip()
-
-
-def clear_history():
-    history_list.clear()
-    save_history()
-    return "🗑 History cleared."
-
-
-load_history()
+# Global history instance
+history = HistoryManager()

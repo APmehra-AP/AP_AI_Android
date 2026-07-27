@@ -1,51 +1,78 @@
+# =========================================================
+# AP AI V4 Stable
 # Created by : Amarchand Meghwal
+# =========================================================
+
+"""
+Application Settings Manager
+"""
 
 import json
 import os
 
-SETTINGS_FILE = "settings.json"
-
-settings = {
-    "language": "Hindi",
-    "theme": "Dark",
-    "ai": "OpenRouter",
-    "version": "34.0"
-}
+from engine.constants import SETTINGS_FILE
 
 
-def load_settings():
-    global settings
+class SettingsManager:
 
-    if os.path.exists(SETTINGS_FILE):
-        try:
-            with open(SETTINGS_FILE, "r") as f:
-                settings = json.load(f)
-        except:
-            pass
+    DEFAULT_SETTINGS = {
+        "dark_mode": True,
+        "voice_enabled": True,
+        "voice_language": "hi-IN",
+        "animations": True,
+        "notifications": True,
+        "remember_history": True,
+        "remember_memory": True,
+        "auto_scroll": True,
+        "font_size": 16,
+        "theme": "blue",
+        "api_key": "",
+        "model": "openai/gpt-5.5"
+    }
+
+    def __init__(self, filename=SETTINGS_FILE):
+        self.filename = filename
+        self.data = {}
+        self.load()
+
+    def load(self):
+        if os.path.exists(self.filename):
+            try:
+                with open(self.filename, "r", encoding="utf-8") as file:
+                    self.data = json.load(file)
+            except Exception:
+                self.data = self.DEFAULT_SETTINGS.copy()
+        else:
+            self.data = self.DEFAULT_SETTINGS.copy()
+            self.save()
+
+    def save(self):
+        with open(self.filename, "w", encoding="utf-8") as file:
+            json.dump(
+                self.data,
+                file,
+                ensure_ascii=False,
+                indent=4
+            )
+
+    def get(self, key, default=None):
+        return self.data.get(key, default)
+
+    def set(self, key, value):
+        self.data[key] = value
+        self.save()
+
+    def update(self, values):
+        if isinstance(values, dict):
+            self.data.update(values)
+            self.save()
+
+    def reset(self):
+        self.data = self.DEFAULT_SETTINGS.copy()
+        self.save()
+
+    def all(self):
+        return dict(self.data)
 
 
-def save_settings():
-    with open(SETTINGS_FILE, "w") as f:
-        json.dump(settings, f, indent=4)
-
-
-def get_setting(key):
-    return settings.get(key, "Not Found")
-
-
-def set_setting(key, value):
-    settings[key] = value
-    save_settings()
-    return f"✅ {key} updated to {value}"
-
-
-def show_settings():
-    result = "⚙ AP AI Settings\n\n"
-
-    for key, value in settings.items():
-        result += f"{key} : {value}\n"
-
-    return result.strip()
-
-
-load_settings()
+settings = SettingsManager()

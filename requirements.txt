@@ -1,0 +1,16 @@
+# =========================================================
+# AP AI V4 Stable
+# Created by : Amarchand Meghwal
+# =========================================================
+
+kivy>=2.3.0
+kivymd>=2.0.1
+requests>=2.32.0
+urllib3>=2.2.2
+certifi>=2026.0.0
+charset-normalizer>=3.4.0
+idna>=3.10
+plyer>=2.1.0
+pillow>=10.4.0
+pygments>=2.19.0
+pyjnius>=1.6.1

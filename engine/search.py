@@ -1,88 +1,80 @@
+# =========================================================
+# AP AI V4 Stable
 # Created by : Amarchand Meghwal
+# =========================================================
 
-from engine.internet import internet_search
+"""
+Search Manager
+"""
 
+import requests
 
-search_data = {
-
-    "python": (
-        "🐍 Python ek high-level programming language hai. "
-        "Ye AI, automation, web development aur data science me bahut use hoti hai."
-    ),
-
-    "ai": (
-        "🤖 AI (Artificial Intelligence) computers ko sochne, "
-        "seekhne aur decision lene ki capability dene ki technology hai."
-    ),
-
-    "android": (
-        "📱 Android Google ka mobile operating system hai."
-    ),
-
-    "termux": (
-        "💻 Termux Android par Linux terminal environment provide karta hai."
-    ),
-
-    "ap ai": (
-        "🚀 AP AI ek personal AI assistant project hai jo AP bana rahe hain."
-    ),
-}
+from engine.network import Network
 
 
-def search(query):
+class SearchManager:
 
-    query = query.strip()
+    def __init__(self):
+        self.session = requests.Session()
 
-    if not query:
-        return "⚠️ Search keyword required."
+    def web(self, query):
+        """
+        Basic web search placeholder.
+        """
 
-    lower = query.lower()
+        query = str(query).strip()
 
-    # ----------------------------
-    # Show Topics
-    # ----------------------------
+        if not query:
+            return {
+                "success": False,
+                "message": "Search query is empty."
+            }
 
-    if lower == "list":
+        if not Network.is_connected():
+            return {
+                "success": False,
+                "message": "No internet connection."
+            }
 
-        result = "📚 Available Topics\n\n"
+        return {
+            "success": True,
+            "query": query,
+            "message": (
+                "Search provider is not configured yet."
+            )
+        }
 
-        for topic in sorted(search_data):
-            result += f"• {topic}\n"
+    def local(self, items, keyword):
+        """
+        Search inside a list of items.
+        """
 
-        return result.strip()
+        keyword = str(keyword).lower().strip()
 
-    # ----------------------------
-    # Add Topic
-    # ----------------------------
+        results = []
 
-    if lower.startswith("add "):
+        for item in items:
 
-        text = query[4:].strip()
+            text = str(item).lower()
 
-        if "=" not in text:
-            return "❌ Use: search add topic = information"
+            if keyword in text:
+                results.append(item)
 
-        topic, info = text.split("=", 1)
+        return {
+            "success": True,
+            "count": len(results),
+            "results": results
+        }
 
-        topic = topic.strip().lower()
-        info = info.strip()
+    def history(self, history_items, keyword):
+        """
+        Search conversation history.
+        """
 
-        if not topic or not info:
-            return "❌ Invalid format."
+        return self.local(
+            history_items,
+            keyword
+        )
 
-        search_data[topic] = info
 
-        return f"✅ '{topic}' added successfully."
-
-    # ----------------------------
-    # Local Search
-    # ----------------------------
-
-    if lower in search_data:
-        return search_data[lower]
-
-    # ----------------------------
-    # Internet Search
-    # ----------------------------
-
-    return internet_search(query)
+search = SearchManager()

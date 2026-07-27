@@ -1,92 +1,95 @@
+# =========================================================
+# AP AI V4 Stable
 # Created by : Amarchand Meghwal
+# =========================================================
 
-from kivy.lang import Builder
-from kivy.core.window import Window
-from kivy.uix.screenmanager import ScreenManager, FadeTransition
+"""
+Main Entry Point
+"""
 
 from kivymd.app import MDApp
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton
 
-from gui.splash import SplashScreen
-from gui.home import HomeScreen
-from gui.chat import ChatScreen
-from gui.voice import VoiceScreen
-from gui.memory import MemoryScreen
-from gui.tools import ToolsScreen
-from gui.settings import SettingsScreen
+from screens.navigation import NavigationManager
 
-Builder.load_file("gui/splash.kv")
-Builder.load_file("gui/home.kv")
-Builder.load_file("gui/chat.kv")
-Builder.load_file("gui/voice.kv")
-Builder.load_file("gui/memory.kv")
-Builder.load_file("gui/tools.kv")
-Builder.load_file("gui/settings.kv")
+from engine.initializer import Initializer
+from engine.theme import ThemeManager
 
 
 class APAI(MDApp):
-
-    dialog = None
+    """
+    AP AI Application
+    """
 
     def build(self):
+
         self.title = "AP AI"
+
+        # -------------------------------
+        # Theme
+        # -------------------------------
 
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Blue"
 
-        sm = ScreenManager(
-            transition=FadeTransition(duration=0.25)
-        )
+        try:
+            ThemeManager(self).apply()
+        except Exception:
+            pass
 
-        sm.add_widget(SplashScreen(name="splash"))
-        sm.add_widget(HomeScreen(name="home"))
-        sm.add_widget(ChatScreen(name="chat"))
-        sm.add_widget(VoiceScreen(name="voice"))
-        sm.add_widget(MemoryScreen(name="memory"))
-        sm.add_widget(ToolsScreen(name="tools"))
-        sm.add_widget(SettingsScreen(name="settings"))
+        # -------------------------------
+        # Initialize Engine
+        # -------------------------------
 
-        sm.current = "home"
+        try:
+            Initializer().initialize()
+        except Exception as e:
+            print("Initialization Error:", e)
 
-        Window.bind(on_keyboard=self.on_back_button)
+        # -------------------------------
+        # Navigation
+        # -------------------------------
 
-        return sm
+        self.navigation = NavigationManager()
 
-    def on_back_button(self, window, key, *args):
-        if key != 27:
-            return False
+        return self.navigation
 
-        sm = self.root
+    # -----------------------------------
 
-        if sm.current != "home":
-            sm.current = "home"
-            return True
+    def goto(self, screen):
 
-        self.show_exit_dialog()
+        if self.navigation:
+            self.navigation.go(screen)
+
+    # -----------------------------------
+
+    def home(self):
+        self.goto("home")
+
+    def chat(self):
+        self.goto("chat")
+
+    def profile(self):
+        self.goto("profile")
+
+    def settings(self):
+        self.goto("settings")
+
+    def about(self):
+        self.goto("about")
+
+    # -----------------------------------
+
+    def on_start(self):
+        print("AP AI Started")
+
+    def on_stop(self):
+        print("AP AI Closed")
+
+    def on_pause(self):
         return True
 
-    def show_exit_dialog(self):
-        if self.dialog:
-            self.dialog.open()
-            return
-
-        self.dialog = MDDialog(
-            title="Exit AP AI?",
-            text="Do you want to close AP AI?",
-            buttons=[
-                MDFlatButton(
-                    text="CANCEL",
-                    on_release=lambda x: self.dialog.dismiss()
-                ),
-                MDFlatButton(
-                    text="EXIT",
-                    on_release=lambda x: self.stop()
-                ),
-            ],
-        )
-
-        self.dialog.open()
+    def on_resume(self):
+        pass
 
 
 if __name__ == "__main__":

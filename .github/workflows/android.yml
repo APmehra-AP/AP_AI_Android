@@ -1,18 +1,26 @@
+# =========================================================
+# AP AI V4 Stable
 # Created by : Amarchand Meghwal
+# =========================================================
 
-name: Build APK
+name: Build AP AI APK
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - master
+
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -20,37 +28,42 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Set up Java
+      - name: Install Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
 
-      - name: Install dependencies
+      - name: Install Build Dependencies
         run: |
           sudo apt update
           sudo apt install -y \
-            git zip unzip openjdk-17-jdk \
-            autoconf automake libtool pkg-config \
-            zlib1g-dev libncurses6 libtinfo6 \
-            cmake libffi-dev libssl-dev
+            zip \
+            unzip \
+            git \
+            wget \
+            curl \
+            build-essential \
+            autoconf \
+            automake \
+            libtool \
+            pkg-config \
+            zlib1g-dev \
+            libncurses5-dev \
+            libffi-dev \
+            libssl-dev
 
-      - name: Install Buildozer
+      - name: Install Python Packages
         run: |
           python -m pip install --upgrade pip
-          pip install Cython==0.29.36
-          pip install buildozer python-for-android
+          pip install buildozer cython
 
-      - name: Add OpenRouter API Key
+      - name: Build Debug APK
         run: |
-          sed -i 's|OPENROUTER_API_KEY = ""|OPENROUTER_API_KEY = "${{ secrets.OPENROUTER_API_KEY }}"|' engine/config.py
-
-      - name: Build APK
-        run: |
-          buildozer android debug --allow-root
+          buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AP_AI_Android_APK
+          name: AP-AI-APK
           path: bin/*.apk
