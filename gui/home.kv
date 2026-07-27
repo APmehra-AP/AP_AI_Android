@@ -1,6 +1,6 @@
 #:import dp kivy.metrics.dp
 
-<HomeScreen>
+<HomeScreen>:
 
     MDBoxLayout:
         orientation: "vertical"
@@ -10,8 +10,10 @@
         MDTopAppBar:
             title: "AP AI"
             elevation: 0
-            left_action_items: [["robot-outline", lambda x: None]]
-            right_action_items: [["cog-outline", lambda x: root.open_settings()]]
+            left_action_items:
+                [["robot-outline", lambda x: None]]
+            right_action_items:
+                [["cog-outline", lambda x: root.open_settings()]]
 
         MDCard:
             size_hint_y: None
@@ -48,7 +50,7 @@
                     text: "Open Chat"
                     size_hint: None, None
                     size: dp(160), dp(48)
-                    pos_hint: {"center_x": .5}
+                    pos_hint: {"center_x": 0.5}
                     on_release: root.open_chat()
 
         MDCard:
@@ -183,8 +185,8 @@
 
                     MDRaisedButton:
                         text: "Open"
-                        on_release: root.open_tools()
-
+                        on_release: root.open_tools(
+)
         MDLabel:
             text: "AI Status"
             bold: True
@@ -222,7 +224,7 @@
                         text: "Version : V3 Stable"
                         theme_text_color: "Hint"
 
-        Widget:
+                Widget:
 
         MDCard:
             size_hint_y: None
