@@ -1,7 +1,6 @@
 #:import dp kivy.metrics.dp
 
-<ChatScreen>
-
+<ChatScreen>:
     MDBoxLayout:
         orientation: "vertical"
         spacing: dp(10)
@@ -14,26 +13,29 @@
         MDCard:
             elevation: 2
             radius: [15]
-            padding: dp(15)
+            padding: dp(12)
             size_hint_y: 1
 
             ScrollView:
+                id: chat_scroll
 
                 MDLabel:
                     id: chat_label
-                    text: "🤖 AP AI\n\nWelcome!\n"
+                    text: "AP AI\n\nWelcome!"
                     adaptive_height: True
-                    halign: "left"
                     text_size: self.width, None
+                    halign: "left"
+                    valign: "top"
 
         MDBoxLayout:
-            size_hint_y: None
-            height: dp(60)
+            adaptive_height: True
             spacing: dp(8)
 
             MDTextField:
                 id: message_input
                 hint_text: "Type a message..."
+                multiline: False
+                mode: "outlined"
 
             MDRaisedButton:
                 text: "Send"
