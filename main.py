@@ -8,32 +8,23 @@ import traceback
 from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 
-from screens.navigation import NavigationManager
-from engine.initializer import Initializer
-from engine.theme import ThemeManager
-
 
 class APAI(MDApp):
 
     def build(self):
-        self.title = "AP AI"
-
         try:
+            self.title = "AP AI"
+
             self.theme_cls.theme_style = "Dark"
             self.theme_cls.primary_palette = "Blue"
 
-            try:
-                ThemeManager(self).apply()
-            except Exception:
-                pass
+            # Import only after app starts
+            from screens.navigation import NavigationManager
 
-            try:
-                Initializer().initialize()
-            except Exception as e:
-                print("Initialization Error:", e)
+            # ThemeManager DISABLED
+            # Initializer DISABLED
 
-            self.navigation = NavigationManager()
-            return self.navigation
+            return NavigationManager()
 
         except Exception:
             error = traceback.format_exc()
