@@ -76,5 +76,5 @@ class SplashScreen(MDScreen):
         Clock.schedule_once(self.goto_home, 2.5)
 
     def goto_home(self, *_):
-        # Abhi test ke liye home par nahi jana.
-        return
+        if self.manager and self.manager.has_screen("home"):
+            self.manager.current = "home"
