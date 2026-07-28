@@ -26,11 +26,11 @@ class NavigationManager(MDScreenManager):
         self.transition = FadeTransition(duration=0.25)
 
         self.add_widget(SplashScreen())
-        self.add_widget(HomeScreen())
-        self.add_widget(ChatScreen())
-        self.add_widget(SettingsScreen())
-        self.add_widget(ProfileScreen())
-        self.add_widget(AboutScreen())
+        #self.add_widget(HomeScreen())
+        #self.add_widget(ChatScreen())
+        #self.add_widget(SettingsScreen())
+        #self.add_widget(ProfileScreen())
+        #self.add_widget(AboutScreen())
 
         self.current = "splash"
 

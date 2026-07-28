@@ -103,5 +103,4 @@ class SplashScreen(MDScreen):
 
     def goto_home(self, *_):
 
-        if self.manager:
-            self.manager.current = "home"
+        return
