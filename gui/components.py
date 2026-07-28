@@ -13,7 +13,7 @@ from kivy.clock import Clock
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
-from kivymd.uix.progressindicator import MDCircularProgressIndicator
+from kivymd.uix.spinner import MDSpinner
 
 from gui.theme import (
     PRIMARY,
@@ -91,11 +91,11 @@ class LoadingIndicator(MDBoxLayout):
         self.adaptive_height = True
         self.spacing = dp(10)
 
-        self.spinner = MDCircularProgressIndicator(
+        self.spinner = MDSpinner(
             size_hint=(None, None),
-            size=(dp(26), dp(26))
+            size=(dp(26), dp(26)),
+            active=True
         )
-
         self.label = MDLabel(
             text="Thinking...",
             adaptive_height=True,
