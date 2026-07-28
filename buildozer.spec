@@ -37,6 +37,8 @@ android.permissions = INTERNET,RECORD_AUDIO,VIBRATE
 
 android.accept_sdk_license = True
 
+android.logcat_filters = *:S python:D
+
 log_level = 2
 
 [buildozer]
