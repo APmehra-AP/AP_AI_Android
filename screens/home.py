@@ -7,19 +7,27 @@
 Home Screen
 """
 
+import threading
+
+from kivy.clock import Clock
+
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.scrollview import MDScrollView
 
 from gui.components import (
     HeaderBar,
     StatusBar,
     LoadingIndicator,
+    ChatBubble,
 )
 
 from gui.widgets import (
     APButton,
     APTextField,
 )
+
+from engine.ai import ai
 
 
 class HomeScreen(MDScreen):
@@ -32,7 +40,7 @@ class HomeScreen(MDScreen):
         root = MDBoxLayout(
             orientation="vertical",
             spacing="12dp",
-            padding="12dp"
+            padding="12dp",
         )
 
         # Header
@@ -40,20 +48,26 @@ class HomeScreen(MDScreen):
         root.add_widget(self.header)
 
         # Chat Area
-        self.chat_area = MDBoxLayout(
-            orientation="vertical"
-        )
-        root.add_widget(self.chat_area)
+        self.scroll = MDScrollView()
 
-        # Loading Indicator
+        self.chat_area = MDBoxLayout(
+            orientation="vertical",
+            adaptive_height=True,
+            spacing="8dp",
+        )
+
+        self.scroll.add_widget(self.chat_area)
+        root.add_widget(self.scroll)
+
+        # Loading
         self.loading = LoadingIndicator()
         self.loading.opacity = 0
         root.add_widget(self.loading)
 
-        # Input Area
+        # Input
         self.input_box = MDBoxLayout(
             adaptive_height=True,
-            spacing="10dp"
+            spacing="10dp",
         )
 
         self.message = APTextField(
@@ -64,13 +78,16 @@ class HomeScreen(MDScreen):
             text="Send"
         )
 
+        self.send_button.bind(
+            on_release=self.send_message
+        )
+
         self.input_box.add_widget(self.message)
         self.input_box.add_widget(self.send_button)
 
         root.add_widget(self.input_box)
 
-
-        # Status Bar
+        # Status
         self.status = StatusBar()
         root.add_widget(self.status)
 
@@ -92,3 +109,46 @@ class HomeScreen(MDScreen):
 
     def add_message(self, widget):
         self.chat_area.add_widget(widget)
+        Clock.schedule_once(lambda dt: setattr(self.scroll, "scroll_y", 0), 0)
+
+    def send_message(self, *args):
+        text = self.get_message()
+
+        if not text:
+            return
+
+        self.add_message(
+            ChatBubble(
+                message=text,
+                sender="user",
+            )
+        )
+
+        self.clear_input()
+        self.show_loading()
+
+        threading.Thread(
+            target=self._ask_ai,
+            args=(text,),
+            daemon=True,
+        ).start()
+
+    def _ask_ai(self, text):
+        try:
+            reply = ai.ask(text)
+        except Exception as e:
+            reply = f"❌ {e}"
+
+        Clock.schedule_once(
+            lambda dt: self._show_reply(reply)
+        )
+
+    def _show_reply(self, reply):
+        self.hide_loading()
+
+        self.add_message(
+            ChatBubble(
+                message=reply,
+                sender="assistant",
+            )
+        )
