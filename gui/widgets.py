@@ -46,7 +46,7 @@ class APSecondaryLabel(MDLabel):
 class APTextField(MDTextField):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.mode = "outlined"
+        self.mode = "rectangle"
         self.size_hint_y = None
         self.height = dp(56)
 
