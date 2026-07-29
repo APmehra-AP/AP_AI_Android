@@ -25,7 +25,7 @@ VERSION = APP_VERSION
 
 AI_NAME = "AP AI"
 
-DEFAULT_MODEL = "openai/gpt-5.5"
+OPENROUTER_MODEL = "openai/gpt-5.5"
 
 SYSTEM_PROMPT = (
     "You are AP AI, created by Amarchand Meghwal. "
