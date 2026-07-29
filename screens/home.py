@@ -45,8 +45,6 @@ class HomeScreen(MDScreen):
         )
         root.add_widget(self.chat_area)
 
-        return
-
         # Loading Indicator
         self.loading = LoadingIndicator()
         self.loading.opacity = 0
