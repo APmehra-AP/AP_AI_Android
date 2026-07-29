@@ -41,7 +41,7 @@ class HeaderBar(MDBoxLayout):
             MDLabel(
                 text=title,
                 bold=True,
-                font_style="Headline",
+                font_style="H5",
                 theme_text_color="Custom",
                 text_color=get_color_from_hex(TEXT_PRIMARY)
             )
