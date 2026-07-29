@@ -1,4 +1,7 @@
+# =========================================================
+# AP AI V4 Stable
 # Created by : Amarchand Meghwal
+# =========================================================
 
 import json
 import ssl
@@ -10,46 +13,46 @@ from urllib.error import HTTPError, URLError
 from engine.config import (
     OPENROUTER_API_KEY,
     OPENROUTER_MODEL,
+    OPENROUTER_BASE_URL,
+    REQUEST_TIMEOUT,
+    SYSTEM_PROMPT,
 )
 
 from engine.memory import memory
-from engine.history import history_list
+from engine.history import history
 
 
 class AIEngine:
 
     def __init__(self):
-        self.url = "https://openrouter.ai/api/v1/chat/completions"
+        self.url = OPENROUTER_BASE_URL
 
     def ask(self, prompt):
 
-        prompt = prompt.strip()
+        prompt = str(prompt).strip()
 
         if not prompt:
             return "🤖 Please ask something."
 
-        if (
-            not OPENROUTER_API_KEY
-            or OPENROUTER_API_KEY == "YOUR_API_KEY"
-        ):
+        if not OPENROUTER_API_KEY:
             return (
                 "❌ OpenRouter API Key not configured.\n"
                 "Please edit engine/config.py"
             )
 
-        memory_text = "\n".join(
-            f"{k}: {v}"
-            for k, v in memory.items()
+        memory_text = json.dumps(
+            memory.all(),
+            ensure_ascii=False,
+            indent=2,
         )
 
-        history_text = "\n".join(
-            history_list[-10:]
-        )
+        history_text = history.export_text()
 
-        context = f"""User Memory:
+        context = f"""
+User Memory:
 {memory_text}
 
-Recent History:
+Conversation History:
 {history_text}
 
 Current User Message:
@@ -61,13 +64,7 @@ Current User Message:
             "messages": [
                 {
                     "role": "system",
-                    "content": (
-                        "You are AP AI created by Amarchand Meghwal. "
-                        "Always reply in the same language as the user. "
-                        "If the user writes in Hindi, reply in Hindi. "
-                        "Use memory and recent history whenever useful. "
-                        "Be accurate, concise and helpful."
-                    ),
+                    "content": SYSTEM_PROMPT,
                 },
                 {
                     "role": "user",
@@ -77,7 +74,6 @@ Current User Message:
         }
 
         try:
-
             req = Request(
                 self.url,
                 data=json.dumps(body).encode("utf-8"),
@@ -87,22 +83,19 @@ Current User Message:
                 },
             )
 
-            context_ssl = ssl.create_default_context(
+            ssl_context = ssl.create_default_context(
                 cafile=certifi.where()
             )
 
             with urlopen(
                 req,
-                timeout=30,
-                context=context_ssl,
+                timeout=REQUEST_TIMEOUT,
+                context=ssl_context,
             ) as response:
 
                 data = json.loads(
                     response.read().decode("utf-8")
                 )
-
-            if "choices" not in data:
-                return "❌ Invalid response received from AI."
 
             choices = data.get("choices", [])
 
@@ -118,6 +111,9 @@ Current User Message:
 
             if not message:
                 return "❌ AI returned an empty reply."
+
+            history.add("user", prompt)
+            history.add("assistant", message)
 
             return message
 
